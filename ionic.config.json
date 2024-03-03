@@ -1,0 +1,7 @@
+{
+  "name": "OpdMobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
