@@ -6,6 +6,7 @@ import { IpdComponent } from './ipd/ipd/ipd.component';
 import { ReportsComponent } from './reports/reports/reports.component';
 import { SettingsComponent } from './settings/settings/settings.component';
 import { LoginComponent } from './un-auth/login/login.component';
+import { HistoryListComponent } from './patient/history-list/history-list.component';
 
 export const routes: Routes = [
     {
@@ -31,7 +32,10 @@ export const routes: Routes = [
         }, {
           path: 'setting',
           component: SettingsComponent
-        },
+        }, {
+          path: 'patient/:patientId/history',
+          component: HistoryListComponent
+        }
       ]
     }, {
       path : 'login',

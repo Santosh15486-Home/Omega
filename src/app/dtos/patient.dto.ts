@@ -87,6 +87,13 @@ export class PresMedicineModel {
     public bOa: string;
 }
 
+export class CountModel {
+  public order: number;
+  public label: string;
+  public patientCount: number;
+  public ipdCount: number;
+}
+
 export class HistoryPrintObj {
     public print: boolean;
     public patient: PatientModel;

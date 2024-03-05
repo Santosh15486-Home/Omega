@@ -65,3 +65,19 @@
         color: var(--ion-color-opposite);
     }
 }
+
+.ic-big {
+    font-size: 3em;
+}
+
+ion-toast.toast-error {
+  --background: red;
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: white;
+}
+
+ion-toast.toast-success {
+  --background: #00b69b;
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --color: white;
+}

@@ -20,4 +20,11 @@
     <ion-button class="ion-margin ion-float-right" (click)="userLogin()">Login</ion-button>
     <ion-button fill="clear" class="ion-margin ion-float-right" (click)="clearForm()">Clear</ion-button>
   </ion-card>
+  <ion-toast
+    [isOpen]="modelService.showToast"
+    [message]="modelService.toastMessage"
+    position="top"
+    [class]="modelService.toastClass"
+    positionAnchor="header"
+    [duration]="5000"></ion-toast>
 </ion-content>

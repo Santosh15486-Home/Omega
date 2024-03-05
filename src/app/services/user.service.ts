@@ -42,7 +42,7 @@ export class UserService {
         }
       }, error: error => {
         this.modelService.loading = false;
-        this.modelService.showErrorBar("Invalid Username or password", "rule");
+        this.modelService.showErrorBar("Invalid Username or password");
       }
     });
   }

@@ -56,6 +56,7 @@ export class Utils {
           patient.age = this.getAgeByDob(patient.dateOfBirth);
         } catch (e) { }
       }
+      patient.dateOfBirth = patient.dateOfBirth.split(" ")[0];
     });
     return patientList;
   }

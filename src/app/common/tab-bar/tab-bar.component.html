@@ -17,3 +17,12 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
+  <ion-toast
+    [isOpen]="modelService.showToast"
+    [message]="modelService.toastMessage"
+    position="top"
+    [class]="modelService.toastClass"
+    positionAnchor="header"
+    [duration]="5000"></ion-toast>
+
+<ion-loading mode="ios" [isOpen]="modelService.loading" message="Loading"></ion-loading>

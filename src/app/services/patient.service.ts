@@ -5,16 +5,16 @@ import { Request, SmartService } from './smart.service';
 import { HistoryModel, PatientModel } from '../dtos/patient.dto';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class PatientService {
   private apis = new Apis();
 
-  constructor(private smartService: SmartService) { }
+  constructor(private smartService: SmartService) {}
 
   public getPatientById(patientId: number): Observable<any> {
     return this.smartService.get(
-      new Request(this.apis.PATIENTS + "/get/" + patientId)
+      new Request(this.apis.PATIENTS + '/get/' + patientId)
     );
   }
 
@@ -23,7 +23,7 @@ export class PatientService {
     patient: PatientModel
   ): Observable<any> {
     return this.smartService.post(
-      new Request(this.apis.PATIENTS + "/search/" + pageNo, patient)
+      new Request(this.apis.PATIENTS + '/search/' + pageNo, patient)
     );
   }
 
@@ -36,24 +36,26 @@ export class PatientService {
     patientId: number
   ): Observable<any> {
     return this.smartService.post(
-      new Request(this.apis.HISTORY + "/" + patientId, history)
+      new Request(this.apis.HISTORY + '/' + patientId, history)
     );
   }
 
   public getPatientHistory(patientId: number): Observable<any> {
     return this.smartService.get(
-      new Request(this.apis.HISTORY + "/" + patientId)
+      new Request(this.apis.HISTORY + '/' + patientId)
     );
   }
 
   public getLastSpecified(limit: number): Observable<any> {
     return this.smartService.get(
-      new Request(this.apis.PATIENTS + "/last/" + limit)
+      new Request(this.apis.PATIENTS + '/last/' + limit)
     );
   }
 
   public admitPatient(patient: PatientModel): Observable<any> {
-    return this.smartService.post(new Request(this.apis.IPD + "/admit/" + patient.id));
+    return this.smartService.post(
+      new Request(this.apis.IPD + '/admit/' + patient.id)
+    );
   }
 
   public getAdmmitedPatients(): Observable<any> {
@@ -61,15 +63,29 @@ export class PatientService {
   }
 
   public getTransactionsForPatient(patientId: number): Observable<any> {
-    return this.smartService.get(new Request(this.apis.TRANSACTION + "/get/" + patientId));
+    return this.smartService.get(
+      new Request(this.apis.TRANSACTION + '/get/' + patientId)
+    );
   }
 
-  public markTransactionPaid(patientId: number, transactionId: number, amount: number): Observable<any> {
-    return this.smartService.post(new Request(this.apis.TRANSACTION + "/pay/" + patientId + transactionId, { 'amount': amount, 'transactionId': transactionId }));
+  public markTransactionPaid(
+    patientId: number,
+    transactionId: number,
+    amount: number
+  ): Observable<any> {
+    return this.smartService.post(
+      new Request(this.apis.TRANSACTION + '/pay/' + patientId + transactionId, {
+        amount: amount,
+        transactionId: transactionId,
+      })
+    );
   }
 
   public deletePatient(id: number): Observable<any> {
-    return this.smartService.delete(new Request(this.apis.PATIENTS + "/"+ id));
+    return this.smartService.delete(new Request(this.apis.PATIENTS + '/' + id));
   }
 
+  public getPatientCounts(): Observable<any> {
+    return this.smartService.get(new Request(this.apis.PATIENT_COUNT));
+  }
 }

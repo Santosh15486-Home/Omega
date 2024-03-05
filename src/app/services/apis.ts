@@ -1,8 +1,6 @@
 
 export class Apis {
   readonly baseUrl = "http://app.smartopd.in/sopd/";
-  // readonly baseUrl = "http://localhost:8088/sopd/";
-  // readonly baseUrl = "/sopd/";
 
   //default page size
   readonly PAGE_SIZE = 20;

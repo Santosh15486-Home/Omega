@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { ModelService } from 'src/app/services/model.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TabBarComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    public modelService: ModelService) { }
 
   ngOnInit() { 
     this.userService.getCurrentUser();

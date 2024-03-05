@@ -1,27 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>Patients</ion-title>
+     <i class="ic ic-action ion-margin-end" slot="end" (click)="toggleNewPatientModel(false)">add</i>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card *ngFor="let pat of patientList" mode="md">
-    <i class=" ic ic-action ion-margin ion-float-right">visibility</i>
-    <ion-card-header class="ion-text-capitalize">
-      <ion-card-title>{{pat.firstName}} {{pat.middleName}} {{pat.lastName}}</ion-card-title>
-      <ion-card-subtitle>Gender : {{pat.gender}} of {{pat.age}} Years </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <p *ngIf="pat.mobileNo && pat.mobileNo != ''">{{pat.mobileNo}}</p>
-      <p *ngIf="pat.address && pat.address != ''">{{pat.address}}</p>
-    </ion-card-content>
-    <i class="ic ic-action ion-margin ion-float-right">add_to_photos</i>
-    <i class="ic ic-action ion-margin ion-float-right">history</i>
-    <i class="ic ic-action ion-margin ion-float-right">stylus_note</i>
-  </ion-card>
-
+  <ng-container *ngIf="patientList.length == 0">
+    <div class="ion-text-center ion-margin-top">
+      <i class="ic ic-big ion-margin-top">info</i>
+      <h2>No data found</h2>
+      <ion-button fill="clear" *ngIf="isFilterAdded" class="ion-margin" (click)="clearFilter(false)">Clear filter</ion-button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="patientList.length > 0">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let pat of patientList">
+          <ion-card  mode="md">
+            <i class=" ic ic-action ion-margin ion-float-right">visibility</i>
+            <ion-card-header class="ion-text-capitalize">
+              <ion-card-title>{{pat.firstName}} {{pat.middleName}} {{pat.lastName}}</ion-card-title>
+              <ion-card-subtitle>Gender : {{pat.gender}} of {{pat.age}} Years </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p *ngIf="pat.mobileNo && pat.mobileNo != ''">{{pat.mobileNo}}</p>
+              <p *ngIf="pat.address && pat.address != ''">{{pat.address}}</p>
+            </ion-card-content>
+            <i class="ic ic-action ion-margin ion-float-right">add_to_photos</i>
+            <i class="ic ic-action ion-margin ion-float-right" (click)="showHistotyl(pat)">history</i>
+            <i class="ic ic-action ion-margin ion-float-right" (click)="toggleNewPatientModel(true, pat)">stylus_note</i>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+ <!-- Filter pupup start-->
   <ion-modal [isOpen]="isFilterModalOpen" mode="md">
     <ng-template>
       <ion-header>
@@ -39,18 +52,67 @@
           placeholder="Last name" [(ngModel)]="searchPatientData.lastName"></ion-input>
         <ion-input class="ion-margin-top" type="number" label="Mobile no" label-placement="floating" fill="outline"
           placeholder="Mobile no" [(ngModel)]="searchPatientData.mobileNo"></ion-input>
+        <!-- <ion-radio-group [(ngModel)]="searchPatientData.gender" value="end">
+          <ion-grid>
+            <ion-row>
+              <ion-col><ion-radio value="Male" labelPlacement="end">Male</ion-radio></ion-col>
+              <ion-col><ion-radio value="Female" labelPlacement="end">Female</ion-radio></ion-col>
+              <ion-col><ion-radio value="Other" labelPlacement="end">Other</ion-radio></ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-radio-group> -->
         <ion-button class="ion-margin ion-float-right" (click)="filterPatient()">Search</ion-button>
         <ion-button fill="clear" class="ion-margin ion-float-right" (click)="clearFilter()">Clear</ion-button>
       </ion-content>
     </ng-template>
   </ion-modal>
+  <!-- Filter pupup end-->
+  <!-- New Patinet start-->
+  <ion-modal [isOpen]="isNewPatientModalOpen" mode="md">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{patientFormTitle}}</ion-title>
+          <i class="ic ic-action ion-margin-end" slot="end" (click)="toggleNewPatientModel()">close</i>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-input class="ion-margin-top" label="First name" label-placement="floating" fill="outline"
+          placeholder="First name" [(ngModel)]="patientForForm.firstName"></ion-input>
+        <ion-input class="ion-margin-top" label="Middle name" label-placement="floating" fill="outline"
+          placeholder="Middle name" [(ngModel)]="patientForForm.middleName"></ion-input>
+        <ion-input class="ion-margin-top" label="Last name" label-placement="floating" fill="outline"
+          placeholder="Last name" [(ngModel)]="patientForForm.lastName"></ion-input>
+        <ion-input class="ion-margin-vertical" type="number" label="Mobile no" label-placement="floating" fill="outline"
+          placeholder="Mobile no" [(ngModel)]="patientForForm.mobileNo"></ion-input>
+
+        <ion-radio-group [(ngModel)]="patientForForm.gender" value="end">
+          <ion-grid>
+            <ion-row>
+              <ion-col><ion-radio value="Male" labelPlacement="end">Male</ion-radio></ion-col>
+              <ion-col><ion-radio value="Female" labelPlacement="end">Female</ion-radio></ion-col>
+              <ion-col><ion-radio value="Other" labelPlacement="end">Other</ion-radio></ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-radio-group>
+        
+        <ion-input class="ion-margin-top" type="text" label="Address" label-placement="floating" fill="outline"
+          placeholder="Address" [(ngModel)]="patientForForm.address"></ion-input>
+        <ion-input class="ion-margin-top" type="date" label="Date of birth" label-placement="floating" fill="outline"
+          placeholder="Date of birth" [(ngModel)]="patientForForm.dateOfBirth"></ion-input>
+        <ion-button class="ion-margin ion-float-right" (click)="savePatient()">Save</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <!-- New Patinet end-->
 </ion-content>
 <ion-footer>
   <ion-toolbar>
     <i class="ic ic-action ion-margin-start" slot="start" (click)="toggleFilterModel()">search</i>
+    <i *ngIf="isFilterAdded" class="ic ic-action ion-margin-start" slot="start" (click)="clearFilter(false)">close</i>
     <i *ngIf="pageNo > 0" class="ic ic-action ion-margin-start" slot="end" (click)="prevPage()">navigate_before</i>
-    <span class="ion-margin-start" slot="end" (click)="prevPage()">{{pageLabel}}</span>
-    <i *ngIf="patientList && patientList.length == 20" class="ic ic-action ion-margin-horizontal" slot="end"
+    <span *ngIf="patientList.length > 0 && pageNo == 0" class="ion-margin-horizontal" slot="end" (click)="prevPage()">{{pageLabel}}</span>
+    <i *ngIf="patientList && patientList.length == 20" class="ic ic-action ion-margin-end" slot="end"
       (click)="nextPage()">navigate_next</i>
     <label slot="center">
       Page : {{pageNo}}
