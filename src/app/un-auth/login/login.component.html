@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Smart Opd</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Login</ion-card-title>
+      <ion-card-subtitle>Log in using your mobile no and password.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+          <ion-input label="Mobile no" labelPlacement="stacked" [clearInput]="true" placeholder="Mobile no"
+            name="Mobile no" [(ngModel)]="user.userName">
+          </ion-input>
+          <ion-input label="Password" labelPlacement="stacked" [clearInput]="true" placeholder="Password"
+            name="Password" type="password" [(ngModel)]="user.password">
+          </ion-input>
+    </ion-card-content>
+    <ion-button class="ion-margin ion-float-right" (click)="userLogin()">Login</ion-button>
+    <ion-button fill="clear" class="ion-margin ion-float-right" (click)="clearForm()">Clear</ion-button>
+  </ion-card>
+</ion-content>
