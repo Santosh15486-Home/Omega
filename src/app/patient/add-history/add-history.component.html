@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <i class="ic ic-action ion-margin-start" slot="start" (click)="goBack()">arrow_back</i>
+    <ion-title>
+      <label class="ion-text-capitalize" *ngIf="patient">Add Visit for {{ patient.firstName }} {{ patient.lastName }}</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item class="input-container ion-margin-top">
+    <ion-input label="Complaint" labelPlacement="stacked" placeholder="Complaint" [(ngModel)]="history.complaints"></ion-input>
+  </ion-item>
+  <ion-item class="input-container ion-margin-top">
+    <ion-input label="Treatment" labelPlacement="stacked" placeholder="Treatment" [(ngModel)]="history.treatment"></ion-input>
+  </ion-item>
+  <ion-item class="input-container ion-margin-top">
+    <ion-input label="Investigation" labelPlacement="stacked" placeholder="Investigation" [(ngModel)]="history.investigation"></ion-input>
+  </ion-item>
+  <ion-grid class="grid-container">
+    <ion-row>
+      <ion-col size="6" *ngFor="let ef of extraFields">
+        <ion-item>
+          <ion-input [label]="ef.fieldName" [type]="ef.fieldType" labelPlacement="stacked" [placeholder]="ef.fieldName"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="grid-container">
+    <ion-row>
+      <ion-col size="4">
+        <ion-item>
+          <ion-input label="Fees" type="number" labelPlacement="stacked" placeholder="Fees" [(ngModel)]="history.fees"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <ion-toggle labelPlacement="stacked" [(ngModel)]="history.feesPaid">Fee Paid</ion-toggle>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item>
+          <ion-input label="Amount paid"  type="number" labelPlacement="stacked"
+          placeholder="Paid" [(ngModel)]="history.amountPaid" [disabled]="!history.feesPaid"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button class="form-button" (click)="addHistory()">Save</ion-button>
+  <ion-button fill="clear" class="form-button" (click)="clearForm()">Clear</ion-button>
+</ion-content>

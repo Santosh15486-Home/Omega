@@ -204,3 +204,29 @@ export class MedicineModel {
     public editMode = false;
     public medicineTypeName: string;
 }
+
+export class IpdHistoryModel {
+    constructor() {
+        this.observations = "";
+        this.treatment = "";
+    }
+    public id: number;
+    public observations: string;
+    public treatment: string;
+    public extraFields: ExtraFields[];
+    public patientId: number;
+    public timeStamp: string;
+}
+
+export class DischargeModel {
+    constructor() {
+        this.feesPaid = true;
+        this.prescription = "";
+    }
+    public prescription: string;
+    public fees: number;
+    public feesPaid : boolean;
+    public amountPaid: number;
+    public patinetId: number;
+    public ipdId: number;
+}

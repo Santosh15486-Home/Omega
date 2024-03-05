@@ -52,12 +52,11 @@ export class UserService {
   }
 
   public getCurrentUser() {
-    this.modelService.loading = true;
     this.smartService.get(new Request(this.apis.CURRENT_USER)).subscribe((res: any) => {
       this.user = res.body;
       this.checkAccountExpiry();
-      this.modelService.loading = false;
       this.userObserver.next(this.user);
+      this.prefService.loadPrefrences();
       if (window.location.href.endsWith("/login")) {
         this.router.navigate(['/']);
       }
@@ -69,6 +68,7 @@ export class UserService {
       if (error.status == "0") {
         this.router.navigate(['login']);
       }
+      this.router.navigate(['login']);
     });
   }
 

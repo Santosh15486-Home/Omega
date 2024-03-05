@@ -11,13 +11,13 @@ import { PatientService } from 'src/app/services/patient.service';
   standalone: true,
   imports: [IonicModule, CommonModule],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   public patinets: PatientModel[] = [];
   public counts: CountModel[]= [];
 
   constructor(private patientService: PatientService) {}
 
-  ngOnInit() {
+  ionViewWillEnter () {
     this.loadData();
   }
 

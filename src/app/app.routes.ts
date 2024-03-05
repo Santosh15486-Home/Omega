@@ -7,6 +7,7 @@ import { ReportsComponent } from './reports/reports/reports.component';
 import { SettingsComponent } from './settings/settings/settings.component';
 import { LoginComponent } from './un-auth/login/login.component';
 import { HistoryListComponent } from './patient/history-list/history-list.component';
+import { AddHistoryComponent } from './patient/add-history/add-history.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,9 @@ export const routes: Routes = [
         }, {
           path: 'patient/:patientId/history',
           component: HistoryListComponent
+        }, {
+          path: 'patient/:patientId/history/add',
+          component: AddHistoryComponent
         }
       ]
     }, {

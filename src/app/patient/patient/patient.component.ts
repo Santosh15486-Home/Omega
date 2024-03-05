@@ -34,6 +34,9 @@ export class PatientComponent implements OnInit {
 
   ngOnInit() {
     this.searchPatientData = new PatientModel();
+  }
+
+  ionViewWillEnter(): void {
     this.getPatientList();
   }
 
@@ -107,6 +110,14 @@ export class PatientComponent implements OnInit {
 
   public showHistotyl(patient: PatientModel): void {
     this.router.navigate(['patient/' + patient.id + '/history']);
+  }
+
+  public addHistory(patient: PatientModel): void {
+    if(patient.status == "ADMITTED") {
+      this.modelService.showErrorBar("Patient in IPD, can not add history");
+      return;
+    }
+    this.router.navigate(['patient/' + patient.id + '/history/add'])
   }
 
   public savePatient(): void {
