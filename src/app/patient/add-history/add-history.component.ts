@@ -1,7 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ExtraFields, HistoryModel, PatientModel } from 'src/app/dtos/patient.dto';
 import { ModelService } from 'src/app/services/model.service';
@@ -28,7 +28,8 @@ export class AddHistoryComponent  implements OnInit {
     private patientService: PatientService,
     private modalService: ModelService,
     private prefrences: PrefrencesService,
-    private _location: Location
+    private _location: Location,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -65,6 +66,7 @@ export class AddHistoryComponent  implements OnInit {
     this.patientService.saveHistory(this.history, this.patient.id).subscribe(data => {
       this.modalService.loading = false;
       this.modalService.showSuccessBar("Patient visit data saved successfully.");
+      this.router.navigate(['patient/' + this.patient.id + '/history'], { replaceUrl: true });
     })
   }
 
@@ -74,6 +76,18 @@ export class AddHistoryComponent  implements OnInit {
 
   public clearForm(): void {
     this.history = new HistoryModel();
+  }
+
+  public onFeeChange(): void {
+    if(this.history.feesPaid) {
+      this.history.amountPaid = this.history.fees;
+    } else {
+      this.history.amountPaid = 0;
+    }
+  }
+
+  public onFeePaidChange(): void {
+    this.history.amountPaid = 0;
   }
 
   private isDataValid(): boolean {
