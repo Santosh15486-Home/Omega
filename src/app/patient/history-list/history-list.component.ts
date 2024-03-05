@@ -55,12 +55,14 @@ export class HistoryListComponent implements OnInit {
 
   private fortmatTreatment(): void {
     this.history.map((his) => {
-      his.treatment = his.treatment.replace(/&quot;/g, '"');
-      if (his.treatment != '' && his.treatment.startsWith('[')) {
-        his.treatType = 'PRINT';
-        his.medicines = JSON.parse(his.treatment);
-      } else {
-        his.treatType = 'RAW';
+      if(his.treatment) {
+        his.treatment = his.treatment.replace(/&quot;/g, '"');
+        if (his.treatment != '' && his.treatment.startsWith('[')) {
+          his.treatType = 'PRINT';
+          his.medicines = JSON.parse(his.treatment);
+        } else {
+          his.treatType = 'RAW';
+        }
       }
     });
   }
