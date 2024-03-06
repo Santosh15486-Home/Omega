@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <i class="ic ic-action ion-margin-start" slot="start" (click)="goBack()">arrow_back</i>
+    <ion-title>
+      <label class="ion-text-capitalize" *ngIf="patient">{{ patient.firstName }} {{ patient.lastName }}</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ng-container *ngIf="patient">
+    <ion-grid>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Name</ion-col>
+        <ion-col size="8" class="detail">: {{patient.firstName}} {{patient.middleName}} {{patient.lastName}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Gender</ion-col>
+        <ion-col size="8" class="detail">: {{patient.gender}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Date of Birth</ion-col>
+        <ion-col size="8" class="detail">: {{patient.dateOfBirth | date:'d MMM yy'}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Mobile No.</ion-col>
+        <ion-col size="8" class="detail">: {{patient.mobileNo}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Address</ion-col>
+        <ion-col size="8" class="detail">: {{patient.address}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="patient.ipd" class="detail-row">
+        <ion-col size="4" class="label">Admitted on</ion-col>
+        <ion-col size="8" class="detail">: {{patient.ipd.admitDate | date:'d MMM yy'}}</ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-padding ion-text-center">
+      <i class="ic ic-action" (click)="showHistory()">history</i>
+    </div>
+  </ng-container>
+</ion-content>
