@@ -3,3 +3,35 @@
     <ion-title>Settings</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding">
+  <ng-container *ngIf="user">
+    <h2>Profile</h2>
+    <ion-grid>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Name</ion-col>
+        <ion-col size="12" class="detail">{{user.firstName}} {{user.lastName}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Mobile</ion-col>
+        <ion-col size="12" class="detail">{{user.mobileNo}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Email</ion-col>
+        <ion-col size="12" class="detail">{{user.email}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Clinic</ion-col>
+        <ion-col size="12" class="detail">{{user.clinic.clinicName}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Address</ion-col>
+        <ion-col size="12" class="detail">{{user.clinic.address}}</ion-col>
+      </ion-row>
+      <ion-row class="detail-row">
+        <ion-col size="4" class="label">Contact no</ion-col>
+        <ion-col size="12" class="detail">{{user.clinic.contactNo}}</ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button class="ion-margin-top" expand="full" (click)="signOut()">Sign out</ion-button>
+  </ng-container>
+</ion-content>

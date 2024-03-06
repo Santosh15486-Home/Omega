@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { PatientModel } from 'src/app/dtos/patient.dto';
 import { ModelService } from 'src/app/services/model.service';
@@ -11,16 +12,16 @@ import { Utils } from 'src/app/services/utils';
   templateUrl: './ipd.component.html',
   styleUrls: ['./ipd.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule],
 })
-export class IpdComponent  implements OnInit {
-
+export class IpdComponent implements OnInit {
   public ipdPatients: PatientModel[] = [];
 
   constructor(
     private patientService: PatientService,
-    private modelService: ModelService
-    ) { }
+    private modelService: ModelService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
@@ -37,4 +38,7 @@ export class IpdComponent  implements OnInit {
     });
   }
 
+  public showPatinetDetail(patient: PatientModel): void {
+    this.router.navigate(['patient/' + patient.id]);
+  }
 }

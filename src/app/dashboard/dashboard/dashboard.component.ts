@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CountModel, PatientModel } from 'src/app/dtos/patient.dto';
 import { PatientService } from 'src/app/services/patient.service';
@@ -13,11 +14,11 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class DashboardComponent {
   public patinets: PatientModel[] = [];
-  public counts: CountModel[]= [];
+  public counts: CountModel[] = [];
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService, private router: Router) {}
 
-  ionViewWillEnter () {
+  ionViewWillEnter() {
     this.loadData();
   }
 
@@ -36,5 +37,9 @@ export class DashboardComponent {
     this.patientService.getLastSpecified(10).subscribe((data) => {
       this.patinets = data.body;
     });
+  }
+
+  public showHistory(patient: PatientModel): void {
+    this.router.navigate(['patient/' + patient.id + '/history']);
   }
 }

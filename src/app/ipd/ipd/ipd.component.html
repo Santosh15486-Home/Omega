@@ -15,7 +15,7 @@
       <ion-row>
         <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let pat of ipdPatients">
           <ion-card  mode="md">
-            <!-- <i class=" ic ic-action ion-margin ion-float-right">visibility</i> -->
+            <i class=" ic ic-action ion-margin ion-float-right" (click)="showPatinetDetail(pat)">visibility</i>
             <ion-card-header class="ion-text-capitalize">
               <ion-card-title>{{pat.firstName}} {{pat.middleName}} {{pat.lastName}}</ion-card-title>
               <ion-card-subtitle>Gender : {{pat.gender}} of {{pat.age}} Years </ion-card-subtitle>

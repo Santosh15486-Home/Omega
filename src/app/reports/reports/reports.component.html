@@ -1,5 +1,58 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Reports</ion-title>
+    <ion-title>
+      <label class="ion-text-capitalize">Reports</label>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content color="light" mode="ios">
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size="6">
+        <ion-item>
+          <ion-select label="Month" label-placement="floating" [(ngModel)]="selectedMonth" (ionChange)="loadReport()">
+            <ion-select-option *ngFor="let mon of months; index as i" [value]="i">{{mon}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+       <ion-col size="6">
+         <ion-item>
+          <ion-select label="Year" label-placement="floating" [(ngModel)]="selectedYear" (ionChange)="loadReport()">
+             <ion-select-option *ngFor="let y of years" [value]="y">{{y}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list [inset]="true" class="ion-text-capitalize" *ngIf="patCountLoaded && feeLoaded">
+    <ion-list-header>
+      <ion-label>Report for {{months[selectedMonth]}} {{selectedYear}}</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="header-row">
+          <ion-col size="6">Date</ion-col>
+          <ion-col size="3" class="ion-text-right">Patients</ion-col>
+          <ion-col size="3" class="ion-text-right">Fee</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ng-container *ngIf="reportData.length > 0">
+      <ion-item *ngFor="let re of reportData">
+        <ion-grid>
+          <ion-row >
+            <ion-col size="6">{{re.label}}</ion-col>
+            <ion-col size="3" class="ion-text-right">{{re.patCount}}</ion-col>
+            <ion-col size="3" class="ion-text-right">{{re.dayFee}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="reportData.length == 0">
+      <ion-item class="ion-text-center">No Data for {{months[selectedMonth]}} {{selectedYear}}</ion-item>
+    </ng-container>
+  </ion-list>
+  <div *ngIf="!patCountLoaded || !feeLoaded" class="ion-text-center" style="margin-top: 200px;">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+</ion-content>

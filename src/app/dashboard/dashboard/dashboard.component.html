@@ -29,6 +29,7 @@
     </ion-list-header>
     <ion-item *ngFor="let pat of patinets">
       <ion-label>{{pat.firstName}} {{pat.lastName}}</ion-label>
+      <i class="ic ic-action ion-float-right" (click)="showHistory(pat)">history</i>
     </ion-item>
   </ion-list>
 </ion-content>

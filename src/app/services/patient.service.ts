@@ -88,4 +88,16 @@ export class PatientService {
   public getPatientCounts(): Observable<any> {
     return this.smartService.get(new Request(this.apis.PATIENT_COUNT));
   }
+
+  public getSelectedMonthPatientReport(month: number, year: number): Observable<any> {
+    return this.smartService.post(
+      new Request(this.apis.REP_CURR_MONTH, { month: month, year: year })
+    );
+  }
+
+  public getSelectedMonthFeeReport(month: number, year: number): Observable<any> {
+    return this.smartService.post(
+      new Request(this.apis.REP_CURR_FEE, { month: month, year: year })
+    );
+  }
 }

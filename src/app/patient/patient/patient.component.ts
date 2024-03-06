@@ -112,12 +112,16 @@ export class PatientComponent implements OnInit {
     this.router.navigate(['patient/' + patient.id + '/history']);
   }
 
+  public showPatinetDetail(patient: PatientModel): void {
+    this.router.navigate(['patient/' + patient.id]);
+  }
+
   public addHistory(patient: PatientModel): void {
-    if(patient.status == "ADMITTED") {
-      this.modelService.showErrorBar("Patient in IPD, can not add history");
+    if (patient.status == 'ADMITTED') {
+      this.modelService.showErrorBar('Patient in IPD, can not add history');
       return;
     }
-    this.router.navigate(['patient/' + patient.id + '/history/add'])
+    this.router.navigate(['patient/' + patient.id + '/history/add']);
   }
 
   public savePatient(): void {

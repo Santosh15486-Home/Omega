@@ -8,41 +8,54 @@ import { SettingsComponent } from './settings/settings/settings.component';
 import { LoginComponent } from './un-auth/login/login.component';
 import { HistoryListComponent } from './patient/history-list/history-list.component';
 import { AddHistoryComponent } from './patient/add-history/add-history.component';
+import { PatientDetailComponent } from './patient/patient-detail/patient-detail.component';
 
 export const routes: Routes = [
-    {
-      path: '',
-      component: TabBarComponent,
-      children: [
-        {
-          path: '',
-          pathMatch: 'full',
-          redirectTo: 'dashboard',
-        }, {
-          path: 'dashboard',
-          component: DashboardComponent
-        }, {
-          path: 'patients',
-          component: PatientComponent
-        }, {
-          path: 'ipd',
-          component: IpdComponent
-        }, {
-          path: 'reports',
-          component: ReportsComponent
-        }, {
-          path: 'setting',
-          component: SettingsComponent
-        }, {
-          path: 'patient/:patientId/history',
-          component: HistoryListComponent
-        }, {
-          path: 'patient/:patientId/history/add',
-          component: AddHistoryComponent
-        }
-      ]
-    }, {
-      path : 'login',
-      component: LoginComponent
-    }
+  {
+    path: '',
+    component: TabBarComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard',
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      {
+        path: 'patients',
+        component: PatientComponent,
+      },
+      {
+        path: 'ipd',
+        component: IpdComponent,
+      },
+      {
+        path: 'reports',
+        component: ReportsComponent,
+      },
+      {
+        path: 'setting',
+        component: SettingsComponent,
+      },
+      {
+        path: 'patient/:patientId/history',
+        component: HistoryListComponent,
+      },
+      {
+        path: 'patient/:patientId/history/add',
+        component: AddHistoryComponent,
+      },
+      {
+        path: 'patient/:patientId',
+        component: PatientDetailComponent,
+      },
+    ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 ];
