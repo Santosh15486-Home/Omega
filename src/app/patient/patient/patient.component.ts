@@ -48,14 +48,9 @@ export class PatientComponent implements OnInit {
         this.modelService.loading = false;
         this.patientList = resp.body;
         let start = this.pageNo * 20;
-        this.pageLabel =
-          'Page : ' +
-          (this.pageNo + 1) +
-          ' (' +
-          (start + 1) +
-          ' - ' +
-          (start + this.patientList.length) +
-          ')';
+        this.pageLabel = 'Page : ' + (this.pageNo + 1);
+        if (this.patientList.length > 0)
+          this.pageLabel = this.pageLabel +  ' (' + (start + 1) + ' - ' + (start + this.patientList.length) + ')';
         Utils.calculateAge(this.patientList);
       });
   }

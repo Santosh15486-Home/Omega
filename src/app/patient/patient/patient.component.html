@@ -45,23 +45,22 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-input class="ion-margin-top" label="First name" label-placement="floating" fill="outline"
-          placeholder="First name" [(ngModel)]="searchPatientData.firstName"></ion-input>
-        <ion-input class="ion-margin-top" label="Middle name" label-placement="floating" fill="outline"
-          placeholder="Middle name" [(ngModel)]="searchPatientData.middleName"></ion-input>
-        <ion-input class="ion-margin-top" label="Last name" label-placement="floating" fill="outline"
-          placeholder="Last name" [(ngModel)]="searchPatientData.lastName"></ion-input>
-        <ion-input class="ion-margin-top" type="number" label="Mobile no" label-placement="floating" fill="outline"
-          placeholder="Mobile no" [(ngModel)]="searchPatientData.mobileNo"></ion-input>
-        <!-- <ion-radio-group [(ngModel)]="searchPatientData.gender" value="end">
-          <ion-grid>
-            <ion-row>
-              <ion-col><ion-radio value="Male" labelPlacement="end">Male</ion-radio></ion-col>
-              <ion-col><ion-radio value="Female" labelPlacement="end">Female</ion-radio></ion-col>
-              <ion-col><ion-radio value="Other" labelPlacement="end">Other</ion-radio></ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-radio-group> -->
+        <ion-item>
+          <ion-input class="ion-margin-top" label="First name" label-placement="floating"
+            placeholder="First name" [(ngModel)]="searchPatientData.firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-margin-top" label="Middle name" label-placement="floating"
+            placeholder="Middle name" [(ngModel)]="searchPatientData.middleName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-margin-top" label="Last name" label-placement="floating"
+            placeholder="Last name" [(ngModel)]="searchPatientData.lastName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-margin-top" type="number" label="Mobile no" label-placement="floating"
+            placeholder="Mobile no" [(ngModel)]="searchPatientData.mobileNo"></ion-input>
+        </ion-item>
         <ion-button class="ion-margin ion-float-right" (click)="filterPatient()">Search</ion-button>
         <ion-button fill="clear" class="ion-margin ion-float-right" (click)="clearFilter()">Clear</ion-button>
       </ion-content>
@@ -78,15 +77,22 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-input class="ion-margin-top" label="First name" label-placement="floating" fill="outline"
-          placeholder="First name" [(ngModel)]="patientForForm.firstName"></ion-input>
-        <ion-input class="ion-margin-top" label="Middle name" label-placement="floating" fill="outline"
-          placeholder="Middle name" [(ngModel)]="patientForForm.middleName"></ion-input>
-        <ion-input class="ion-margin-top" label="Last name" label-placement="floating" fill="outline"
-          placeholder="Last name" [(ngModel)]="patientForForm.lastName"></ion-input>
-        <ion-input class="ion-margin-vertical" type="number" label="Mobile no" label-placement="floating" fill="outline"
-          placeholder="Mobile no" [(ngModel)]="patientForForm.mobileNo"></ion-input>
-
+        <ion-item>
+          <ion-input class="ion-margin-top" label="First name" label-placement="floating"
+            placeholder="First name" [(ngModel)]="patientForForm.firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-margin-top" label="Middle name" label-placement="floating"
+            placeholder="Middle name" [(ngModel)]="patientForForm.middleName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-margin-top" label="Last name" label-placement="floating"
+            placeholder="Last name" [(ngModel)]="patientForForm.lastName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-margin-vertical" type="number" label="Mobile no" label-placement="floating"
+            placeholder="Mobile no" [(ngModel)]="patientForForm.mobileNo"></ion-input>
+        </ion-item>
         <ion-radio-group [(ngModel)]="patientForForm.gender" value="end">
           <ion-grid>
             <ion-row>
@@ -97,10 +103,14 @@
           </ion-grid>
         </ion-radio-group>
         
-        <ion-input class="ion-margin-top" type="text" label="Address" label-placement="floating" fill="outline"
-          placeholder="Address" [(ngModel)]="patientForForm.address"></ion-input>
-        <ion-input class="ion-margin-top" type="date" label="Date of birth" label-placement="floating" fill="outline"
-          placeholder="Date of birth" [(ngModel)]="patientForForm.dateOfBirth"></ion-input>
+        <ion-item>
+          <ion-input class="ion-margin-top" type="text" label="Address" label-placement="floating"
+            placeholder="Address" [(ngModel)]="patientForForm.address"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input class="ion-margin-top" type="date" label="Date of birth" label-placement="floating"
+            placeholder="Date of birth" [(ngModel)]="patientForForm.dateOfBirth"></ion-input>
+          </ion-item>
         <ion-button class="ion-margin ion-float-right" (click)="savePatient()">Save</ion-button>
       </ion-content>
     </ng-template>
@@ -112,7 +122,7 @@
     <i class="ic ic-action ion-margin-start" slot="start" (click)="toggleFilterModel()">search</i>
     <i *ngIf="isFilterAdded" class="ic ic-action ion-margin-start" slot="start" (click)="clearFilter(false)">close</i>
     <i *ngIf="pageNo > 0" class="ic ic-action ion-margin-start" slot="end" (click)="prevPage()">navigate_before</i>
-    <span *ngIf="patientList.length > 0 && pageNo == 0" class="ion-margin-horizontal" slot="end" (click)="prevPage()">{{pageLabel}}</span>
+    <span class="ion-margin-horizontal" slot="end" (click)="prevPage()">{{pageLabel}}</span>
     <i *ngIf="patientList && patientList.length == 20" class="ic ic-action ion-margin-end" slot="end"
       (click)="nextPage()">navigate_next</i>
     <label slot="center">

@@ -7,35 +7,48 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-    <ion-input class="ion-margin-top" label="Complaint" label-placement="floating" placeholder="Complaint" fill="outline"
+  <ion-item>
+    <ion-input class="ion-margin-top" label="Complaint" label-placement="floating" placeholder="Complaint"
       [(ngModel)]="history.complaints"></ion-input>
-    <ion-input class="ion-margin-top" label="Treatment" labelPlacement="floating" placeholder="Treatment" fill="outline"
+  </ion-item>
+  <ion-item>
+    <ion-input class="ion-margin-top" label="Treatment" labelPlacement="floating" placeholder="Treatment"
       [(ngModel)]="history.treatment"></ion-input>
-    <ion-input class="ion-margin-top" label="Investigation" labelPlacement="floating" placeholder="Investigation" fill="outline"
+  </ion-item>
+  <ion-item>
+    <ion-input class="ion-margin-top" label="Investigation" labelPlacement="floating" placeholder="Investigation"
     [(ngModel)]="history.investigation"></ion-input>
+  </ion-item>
   <ion-grid class="extra-fields-container">
     <ion-row>
       <ion-col size="6" *ngFor="let ef of extraFields">
-          <ion-input [label]="ef.fieldName" [type]="ef.fieldType" labelPlacement="floating" fill="outline"
+         <ion-item>
+          <ion-input [label]="ef.fieldName" [type]="ef.fieldType" labelPlacement="floating"
           [placeholder]="ef.fieldName" [(ngModel)]="ef.fieldValue"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid >
     <ion-row>
       <ion-col size="4">
-          <ion-input label="Fees" type="number" labelPlacement="floating" fill="outline" 
+        <ion-item>
+          <ion-input label="Fees" type="number" labelPlacement="floating"
           placeholder="Fees" [(ngModel)]="history.fees"(input)="onFeeChange()"></ion-input>
+        </ion-item>
       </ion-col>
       <ion-col size="4" class="ion-text-center">
-        <ion-toggle labelPlacement="stacked" [(ngModel)]="history.feesPaid" (ionChange)="onFeePaidChange()">Fee Paid</ion-toggle>
+          <ion-toggle labelPlacement="stacked" [(ngModel)]="history.feesPaid" (ionChange)="onFeePaidChange()">Fee Paid</ion-toggle>
       </ion-col>
       <ion-col size="4">
-          <ion-input label="Amount paid"  type="number" labelPlacement="floating" fill="outline"
+        <ion-item>
+          <ion-input label="Amount paid"  type="number" labelPlacement="floating"
           placeholder="Paid" [(ngModel)]="history.amountPaid" [disabled]="!history.feesPaid"></ion-input>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <br/>
   <ion-button class="form-button" (click)="addHistory()">Save</ion-button>
   <ion-button fill="clear" class="form-button" (click)="clearForm()">Clear</ion-button>
 </ion-content>
