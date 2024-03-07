@@ -40,6 +40,6 @@ export class DashboardComponent {
   }
 
   public showHistory(patient: PatientModel): void {
-    this.router.navigate(['patient/' + patient.id + '/history']);
+    this.router.navigate(['app/patient/' + patient.id + '/history']);
   }
 }

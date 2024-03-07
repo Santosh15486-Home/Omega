@@ -17,12 +17,15 @@
       </ion-item>
       <ion-item>
         <ion-input label="Password" labelPlacement="stacked" [clearInput]="true" placeholder="Password"
-          name="Password" type="password" [(ngModel)]="user.password">
+          name="Password" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="user.password">
         </ion-input>
       </ion-item>
+      <ion-checkbox class="ion-margin" mode="md" labelPlacement="end" [(ngModel)]="showPassword">{{showPassword ? 'Hide Password' : 'Show Password'}}</ion-checkbox>
     </ion-card-content>
-    <ion-button class="ion-margin ion-float-right" (click)="userLogin()">Login</ion-button>
-    <ion-button fill="clear" class="ion-margin ion-float-right" (click)="clearForm()">Clear</ion-button>
+    <ion-toggle class="ion-margin ion-padding-start ion-float-left" labelPlacement="end" 
+    [(ngModel)]="autoLogin" (ionChange)="autoLooginToggle()">Auto Login</ion-toggle>
+    <ion-button class="ion-margin ion-float-right" (click)="userLogin(autoLogin)">Login</ion-button>
+    <!-- <ion-button fill="clear" class="ion-margin ion-float-right" (click)="clearForm()">Clear</ion-button> -->
   </ion-card>
   <ion-toast
     [isOpen]="modelService.showToast"

@@ -230,3 +230,8 @@ export class DischargeModel {
     public patinetId: number;
     public ipdId: number;
 }
+
+export class AutoLoginData {
+    public canAutoLogin = false;
+    public loginData: LoginModel;
+}

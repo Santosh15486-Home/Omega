@@ -41,7 +41,7 @@ export class PatientDetailComponent implements OnInit {
   }
 
   public showHistory(): void {
-    this.router.navigate(['patient/' + this.patient.id + '/history']);
+    this.router.navigate(['app/patient/' + this.patient.id + '/history']);
   }
 
   public goBack(): void {

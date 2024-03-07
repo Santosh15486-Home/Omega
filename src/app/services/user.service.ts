@@ -25,15 +25,21 @@ export class UserService {
     private prefService: PrefrencesService
   ) { }
 
-  public login(data: LoginModel) {
+  public login(data: LoginModel, autoLogin: boolean) {
     this.modelService.loading = true;
     return this.smartService.login(new Request(this.apis.LOGIN, data)).subscribe({
       next: result => {
         this.modelService.loading = false;
         if (result.body.token) {
+          if (autoLogin) {
+            this.apis.setAutoLoginData({
+              canAutoLogin: autoLogin,
+              loginData: data,
+            });
+          }
           this.apis.setUserId(result.body.user.user_id);
           this.apis.setAuthToken('Bearer ' + result.body.token);
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['app/dashboard']);
           this.getCurrentUser();
           this.coreService.getLeftPanelMenus();
           this.prefService.loadPrefrences();
@@ -58,7 +64,7 @@ export class UserService {
       this.userObserver.next(this.user);
       this.prefService.loadPrefrences();
       if (window.location.href.endsWith("/login")) {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['app/dashboard']);
       }
     }, (error) => {
       this.modelService.loading = false;

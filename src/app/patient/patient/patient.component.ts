@@ -104,11 +104,11 @@ export class PatientComponent implements OnInit {
   }
 
   public showHistotyl(patient: PatientModel): void {
-    this.router.navigate(['patient/' + patient.id + '/history']);
+    this.router.navigate(['app/patient/' + patient.id + '/history']);
   }
 
   public showPatinetDetail(patient: PatientModel): void {
-    this.router.navigate(['patient/' + patient.id]);
+    this.router.navigate(['app/patient/' + patient.id]);
   }
 
   public addHistory(patient: PatientModel): void {
@@ -116,7 +116,7 @@ export class PatientComponent implements OnInit {
       this.modelService.showErrorBar('Patient in IPD, can not add history');
       return;
     }
-    this.router.navigate(['patient/' + patient.id + '/history/add']);
+    this.router.navigate(['app/patient/' + patient.id + '/history/add']);
   }
 
   public savePatient(): void {

@@ -9,14 +9,15 @@ import { LoginComponent } from './un-auth/login/login.component';
 import { HistoryListComponent } from './patient/history-list/history-list.component';
 import { AddHistoryComponent } from './patient/add-history/add-history.component';
 import { PatientDetailComponent } from './patient/patient-detail/patient-detail.component';
+import { AccoutExpiredComponent } from './un-auth/accout-expired/accout-expired.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'app',
     component: TabBarComponent,
     children: [
       {
-        path: '',
+        path: 'app',
         pathMatch: 'full',
         redirectTo: 'dashboard',
       },
@@ -57,5 +58,14 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'deactivated',
+    component: AccoutExpiredComponent
   },
 ];

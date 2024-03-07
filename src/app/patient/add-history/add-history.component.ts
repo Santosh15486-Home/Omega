@@ -66,7 +66,7 @@ export class AddHistoryComponent  implements OnInit {
     this.patientService.saveHistory(this.history, this.patient.id).subscribe(data => {
       this.modalService.loading = false;
       this.modalService.showSuccessBar("Patient visit data saved successfully.");
-      this.router.navigate(['patient/' + this.patient.id + '/history'], { replaceUrl: true });
+      this.router.navigate(['app/patient/' + this.patient.id + '/history'], { replaceUrl: true });
     })
   }
 
