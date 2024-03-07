@@ -13,7 +13,7 @@ import { environment } from './environments/environment';
 import { provideServiceWorker } from '@angular/service-worker';
 
 if (environment.production) {
-  //enableProdMode();
+  enableProdMode();
 }
 
 bootstrapApplication(AppComponent, {
@@ -22,9 +22,9 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withHashLocation()),
     provideHttpClient(),
-    // provideServiceWorker('ngsw-worker.js', {
-    //     enabled: !isDevMode(),
-    //     registrationStrategy: 'registerWhenStable:30000'
-    // })
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    })
 ],
 });
