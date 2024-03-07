@@ -14,14 +14,16 @@ import { Utils } from 'src/app/services/utils';
   templateUrl: './add-history.component.html',
   styleUrls: ['./add-history.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule],
 })
-export class AddHistoryComponent  implements OnInit {
-
+export class AddHistoryComponent implements OnInit {
   public patientId: number;
   public patient: PatientModel;
   public extraFields: ExtraFields[] = [];
   public history: HistoryModel;
+  public complaintChips: ExtraFields[] = [];
+  public treatChips: ExtraFields[] = [];
+  public investChips: ExtraFields[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -30,13 +32,15 @@ export class AddHistoryComponent  implements OnInit {
     private prefrences: PrefrencesService,
     private _location: Location,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
-    setTimeout(()=>{
-      this.extraFields = this.prefrences.historyExtras ? 
-      JSON.parse(JSON.stringify(this.prefrences.historyExtras)) : [];
-    }, 2000)
+    this.extraFields = this.prefrences.historyExtras
+      ? JSON.parse(JSON.stringify(this.prefrences.historyExtras))
+      : [];
+    this.complaintChips = this.prefrences.compTags;
+    this.treatChips = this.prefrences.treatTags;
+    this.investChips = this.prefrences.invTags;
     this.route.params.subscribe((paramas) => {
       this.patientId = paramas['patientId'];
       this.getPatientDetails();
@@ -58,29 +62,37 @@ export class AddHistoryComponent  implements OnInit {
 
   public addHistory(): void {
     if (!this.isDataValid()) {
-      this.modalService.showErrorBar("Noting to save.")
+      this.modalService.showErrorBar('Noting to save.');
       return;
     }
     this.modalService.loading = true;
     this.setExtraFields();
-    this.patientService.saveHistory(this.history, this.patient.id).subscribe(data => {
-      this.modalService.loading = false;
-      this.modalService.showSuccessBar("Patient visit data saved successfully.");
-      this.router.navigate(['app/patient/' + this.patient.id + '/history'], { replaceUrl: true });
-    })
+    this.patientService
+      .saveHistory(this.history, this.patient.id)
+      .subscribe((data) => {
+        this.modalService.loading = false;
+        this.modalService.showSuccessBar(
+          'Patient visit data saved successfully.'
+        );
+        this.router.navigate(['app/patient/' + this.patient.id + '/history'], {
+          replaceUrl: true,
+        });
+      });
   }
 
   public setExtraFields(): void {
-    this.history.extraFields = this.extraFields.filter((field: ExtraFields) => Utils.isStringValid(field.fieldValue, 1))
+    this.history.extraFields = this.extraFields.filter((field: ExtraFields) =>
+      Utils.isStringValid(field.fieldValue, 1)
+    );
   }
 
   public clearForm(): void {
     this.history = new HistoryModel();
-    this.extraFields.forEach(ef => ef.fieldValue = '');
+    this.extraFields.forEach((ef) => (ef.fieldValue = ''));
   }
 
   public onFeeChange(): void {
-    if(this.history.feesPaid) {
+    if (this.history.feesPaid) {
       this.history.amountPaid = this.history.fees;
     } else {
       this.history.amountPaid = 0;
@@ -91,8 +103,23 @@ export class AddHistoryComponent  implements OnInit {
     this.history.amountPaid = 0;
   }
 
-  private isDataValid(): boolean {
-    return (this.history.complaints != "" || this.history.investigation != "" || this.history.treatment != "");
+  public addTreatment(chip: ExtraFields): void {
+    this.history.treatment = this.history.treatment + ' ' + chip.fieldName;
   }
 
+  public addComplaint(chip: ExtraFields): void {
+    this.history.complaints = this.history.complaints + ' ' + chip.fieldName;
+  }
+
+  public addInvestigation(chip: ExtraFields): void {
+    this.history.investigation = this.history.investigation + ' ' + chip.fieldName;
+  }
+
+  private isDataValid(): boolean {
+    return (
+      this.history.complaints != '' ||
+      this.history.investigation != '' ||
+      this.history.treatment != ''
+    );
+  }
 }

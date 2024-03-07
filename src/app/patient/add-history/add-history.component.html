@@ -11,14 +11,23 @@
     <ion-input class="ion-margin-top" label="Complaint" label-placement="floating" placeholder="Complaint"
       [(ngModel)]="history.complaints"></ion-input>
   </ion-item>
+  <div class="chip-container ion-margin-horizontal" *ngIf="complaintChips && complaintChips.length > 0">
+    <ion-chip class="chip" *ngFor="let chip of complaintChips" [outline]="true" (click)="addComplaint(chip)">{{chip.fieldName}}</ion-chip>
+  </div>
   <ion-item>
     <ion-input class="ion-margin-top" label="Treatment" labelPlacement="floating" placeholder="Treatment"
       [(ngModel)]="history.treatment"></ion-input>
   </ion-item>
+  <div class="chip-container ion-margin-horizontal" *ngIf="treatChips && treatChips.length > 0">
+    <ion-chip class="chip" *ngFor="let chip of treatChips" [outline]="true" (click)="addTreatment(chip)">{{chip.fieldName}}</ion-chip>
+  </div>
   <ion-item>
     <ion-input class="ion-margin-top" label="Investigation" labelPlacement="floating" placeholder="Investigation"
     [(ngModel)]="history.investigation"></ion-input>
   </ion-item>
+  <div class="chip-container ion-margin-horizontal" *ngIf="investChips && investChips.length > 0">
+    <ion-chip class="chip" *ngFor="let chip of investChips" [outline]="true" (click)="addInvestigation(chip)">{{chip.fieldName}}</ion-chip>
+  </div>
   <ion-grid class="extra-fields-container">
     <ion-row>
       <ion-col size="6" *ngFor="let ef of extraFields">

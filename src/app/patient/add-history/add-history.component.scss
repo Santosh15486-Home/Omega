@@ -1,8 +1,22 @@
 .form-button {
-    margin: 10px 30px 30px 0px;
-    float: right;
+  margin: 10px 30px 30px 0px;
+  float: right;
 }
 .extra-fields-container {
-    margin: 20px 0px 10px 0px;
-    border-radius: 3px;
+  margin: 20px 0px 10px 0px;
+  border-radius: 3px;
+}
+.chip-container {
+  white-space: nowrap;
+  overflow: auto;
+  padding: 5px 0px;
+  margin-top: 3px;
+
+  .chip {
+    font-size: 0.7em;
+    border-width: 1px;
+    border-style: solid;
+    display: inline;
+    margin: 0px 5px 0px 0px;
+  }
 }
