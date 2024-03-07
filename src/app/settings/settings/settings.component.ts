@@ -20,6 +20,7 @@ export class SettingsComponent {
   }
 
   public signOut(): void {
+    localStorage.clear();
     sessionStorage.clear();
     window.location.reload();
   }
