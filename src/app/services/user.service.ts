@@ -33,7 +33,7 @@ export class UserService {
         if (result.body.token) {
           this.apis.setUserId(result.body.user.user_id);
           this.apis.setAuthToken('Bearer ' + result.body.token);
-          this.router.navigate(['/']);
+          this.router.navigate(['dashboard']);
           this.getCurrentUser();
           this.coreService.getLeftPanelMenus();
           this.prefService.loadPrefrences();
@@ -58,7 +58,7 @@ export class UserService {
       this.userObserver.next(this.user);
       this.prefService.loadPrefrences();
       if (window.location.href.endsWith("/login")) {
-        this.router.navigate(['/']);
+        this.router.navigate(['dashboard']);
       }
     }, (error) => {
       this.modelService.loading = false;

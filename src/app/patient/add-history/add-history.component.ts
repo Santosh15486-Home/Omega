@@ -76,6 +76,7 @@ export class AddHistoryComponent  implements OnInit {
 
   public clearForm(): void {
     this.history = new HistoryModel();
+    this.extraFields.forEach(ef => ef.fieldValue = '');
   }
 
   public onFeeChange(): void {

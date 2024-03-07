@@ -1,7 +1,7 @@
 {
   "name": "Smart Opd",
   "short_name": "SOpd",
-  "theme_color": "#1976d2",
+  "theme_color": "#00b69b",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
