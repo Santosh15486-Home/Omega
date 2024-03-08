@@ -25,9 +25,9 @@
               <p *ngIf="pat.address && pat.address != ''">{{pat.address}}</p>
               <p class="text-bold">Admitted on : {{pat.admitDate | date: 'd MMM yy'}}</p>
             </ion-card-content>
-            <!-- <i class="ic ic-action ion-margin ion-float-right">add_to_photos</i>
-            <i class="ic ic-action ion-margin ion-float-right" (click)="showHistotyl(pat)">history</i>
-            <i class="ic ic-action ion-margin ion-float-right" (click)="toggleNewPatientModel(true, pat)">stylus_note</i> -->
+            <i class="ic ic-action ion-margin ion-float-right" (click)="showHistory(pat)">history</i>
+            <i class="ic ic-action ion-margin ion-float-right" (click)="addIpd(pat)">add_task</i>
+            <i class="ic ic-action ion-margin ion-float-right" (click)="dischargePatient(pat)">moving_beds</i>
           </ion-card>
         </ion-col>
       </ion-row>

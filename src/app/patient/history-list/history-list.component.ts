@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HistoryModel, PatientModel } from 'src/app/dtos/patient.dto';
 import { ModelService } from 'src/app/services/model.service';
@@ -23,7 +23,8 @@ export class HistoryListComponent implements OnInit {
     private route: ActivatedRoute,
     private patientService: PatientService,
     private modalService: ModelService,
-    private _location: Location
+    private _location: Location,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -47,6 +48,10 @@ export class HistoryListComponent implements OnInit {
       this.fortmatTreatment();
       this.modalService.loading = false;
     });
+  }
+
+  public showIpdDetails(ipdId: number): void {
+    this.router.navigate(['app/patient/' + this.patient.id + '/ipd/' + ipdId]);
   }
 
   public goBack(): void {

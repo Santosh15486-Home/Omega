@@ -1,0 +1,34 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <i class="ic ic-action ion-margin-start" slot="start" (click)="goBack()">arrow_back</i>
+    <ion-title>
+      <label class="ion-text-capitalize" *ngIf="patient">IPD Round : {{ patient.firstName }} {{ patient.lastName }}</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input class="ion-margin-top" label="Observations" label-placement="floating" placeholder="Observations"
+      [(ngModel)]="ipd.observations"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input class="ion-margin-top" label="Treatment" label-placement="floating" placeholder="Treatment"
+      [(ngModel)]="ipd.treatment"></ion-input>
+  </ion-item>
+  <ion-grid class="extra-fields-container">
+    <ion-row>
+      <ion-col size="6" *ngFor="let ef of extraFields">
+         <ion-item>
+          <ion-input [label]="ef.fieldName" [type]="ef.fieldType" labelPlacement="floating"
+          [placeholder]="ef.fieldName" [(ngModel)]="ef.fieldValue"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br/>
+  <div class="ion-text-right">
+    <ion-button fill="clear" class="form-button" (click)="clearForm()">Clear</ion-button>
+    <ion-button class="form-button" (click)="addIpdRound()">Add round</ion-button>
+  </div>
+  
+</ion-content>

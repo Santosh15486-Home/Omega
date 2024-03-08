@@ -44,6 +44,14 @@ export class PatientDetailComponent implements OnInit {
     this.router.navigate(['app/patient/' + this.patient.id + '/history']);
   }
 
+  public dischargePatient(): void {
+    this.router.navigate(['app/patient/' + this.patient.id + '/discharge']);
+  }
+
+  public addIpdRound(): void {
+    this.router.navigate(['app/patient/' + this.patient.id + '/add/ipd'])
+  }
+
   public goBack(): void {
     this._location.back();
   }

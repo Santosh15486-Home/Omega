@@ -35,7 +35,9 @@
       </ion-row>
     </ion-grid>
     <div class="ion-padding ion-text-center">
-      <i class="ic ic-action" (click)="showHistory()">history</i>
+      <i class="ic ic-action ion-margin" (click)="showHistory()">history</i>
+      <i class="ic ic-action ion-margin" (click)="dischargePatient()" *ngIf="patient.ipd">add_task</i>
+      <i class="ic ic-action ion-margin" (click)="addIpdRound()" *ngIf="patient.ipd">moving_beds</i>
     </div>
   </ng-container>
 </ion-content>

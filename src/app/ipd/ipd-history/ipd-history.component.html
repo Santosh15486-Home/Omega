@@ -1,0 +1,55 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <i class="ic ic-action ion-margin-start" slot="start" (click)="goBack()">arrow_back</i>
+    <ion-title>
+      <label class="ion-text-capitalize" *ngIf="patient">IPD histoty</label>
+    </ion-title>
+    <i class="ic ic-action ion-margin-end" slot="end" (click)="addIpdHistory()" *ngIf="patient && patient.ipd">add_task</i>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card  mode="ios" *ngIf="patient">
+    <ion-card-header class="ion-text-capitalize">
+      <ion-card-title>{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}</ion-card-title>
+      <ion-card-subtitle>Gender : {{patient.gender}} , Age :{{patient.age}} Years </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="ion-text-capitalize">
+      <p *ngIf="patient.mobileNo && patient.mobileNo != ''">Mobile no : {{patient.mobileNo}}</p>
+      <p *ngIf="patient.address && patient.address != ''">Address : {{patient.address}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ng-container *ngIf="ipdHistory.length == 0">
+    <div class="ion-text-center ion-margin-top">
+      <i class="ic ic-big ion-margin-top">info</i>
+      <h2>No IPD rounds added</h2>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="ipdHistory.length > 0">
+    <ion-list mode="ios">
+      <ion-list-header>
+        <ion-label>Patient IPD History : </ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let iHis of ipdHistory">
+        <ion-grid class="ion-text-capitalize">
+          <ion-row>
+            <ion-col size="6" class="text-big">Date : {{iHis.timeStamp | date :'d MMM yy'}}</ion-col>
+            <ion-col size="6"></ion-col>
+            <ng-container *ngIf="iHis.observations">
+              <ion-col size="4" class="text-bold">Observations</ion-col>
+              <ion-col size="8" class="ion-text-start small-text">{{iHis.observations}}</ion-col>
+            </ng-container>
+            <ng-container *ngIf="iHis.treatment">
+              <ion-col size="4" class="text-bold">Treatment</ion-col>
+              <ion-col size="8" class="ion-text-start small-text">{{iHis.treatment}}</ion-col>
+            </ng-container>
+          </ion-row>
+          <ion-row>
+            <ng-container *ngFor="let ef of iHis.extraFields">
+              <ion-col class="ion-text-center small-text"><span class="text-big">{{ef.fieldName}}</span><br/>{{ef.fieldValue}}</ion-col>
+            </ng-container>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>

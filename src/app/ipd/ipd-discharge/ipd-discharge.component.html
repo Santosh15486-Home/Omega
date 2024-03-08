@@ -1,0 +1,48 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <i class="ic ic-action ion-margin-start" slot="start" (click)="goBack()">arrow_back</i>
+    <ion-title>
+      <label class="ion-text-capitalize" *ngIf="patient">Discharge Patient</label>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card  mode="ios" *ngIf="patient">
+    <ion-card-header class="ion-text-capitalize">
+      <ion-card-title>{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}</ion-card-title>
+      <ion-card-subtitle>Gender : {{patient.gender}} , Age :{{patient.age}} Years </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="ion-text-capitalize">
+      <p *ngIf="patient.mobileNo && patient.mobileNo != ''">Mobile no : {{patient.mobileNo}}</p>
+      <p *ngIf="patient.address && patient.address != ''">Address : {{patient.address}}</p>
+    </ion-card-content>
+  </ion-card>
+  <br/>
+  <ion-item style="margin: 0px 25px 0px 10px;">
+    <ion-input class="ion-margin-top" label="Observations" label-placement="floating" placeholder="Observations"
+      [(ngModel)]="discharge.prescription"></ion-input>
+  </ion-item>
+  <ion-grid style="margin-right: 15px;">
+    <ion-row>
+      <ion-col size="4">
+        <ion-item>
+          <ion-input label="Fees" type="number" labelPlacement="floating"
+          placeholder="Fees" [(ngModel)]="discharge.fees"(input)="onFeeChange()"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+          <ion-toggle mode="md" labelPlacement="stacked" [(ngModel)]="discharge.feesPaid" (ionChange)="onFeePaidChange()">Fee Paid</ion-toggle>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item>
+          <ion-input label="Amount paid"  type="number" labelPlacement="floating"
+          placeholder="Paid" [(ngModel)]="discharge.amountPaid" [disabled]="!discharge.feesPaid"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="ion-text-right ion-padding">
+    <ion-button fill="clear" class="form-button" (click)="clearForm()">Clear</ion-button>
+    <ion-button class="form-button" (click)="dischargePatient()">Discharge</ion-button>
+  </div>
+</ion-content>

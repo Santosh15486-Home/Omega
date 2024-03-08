@@ -10,6 +10,9 @@ import { HistoryListComponent } from './patient/history-list/history-list.compon
 import { AddHistoryComponent } from './patient/add-history/add-history.component';
 import { PatientDetailComponent } from './patient/patient-detail/patient-detail.component';
 import { AccoutExpiredComponent } from './un-auth/accout-expired/accout-expired.component';
+import { IpdHistoryComponent } from './ipd/ipd-history/ipd-history.component';
+import { IpdFormComponent } from './ipd/ipd-form/ipd-form.component';
+import { IpdDischargeComponent } from './ipd/ipd-discharge/ipd-discharge.component';
 
 export const routes: Routes = [
   {
@@ -40,19 +43,25 @@ export const routes: Routes = [
       {
         path: 'setting',
         component: SettingsComponent,
-      },
-      {
+      }, {
         path: 'patient/:patientId/history',
         component: HistoryListComponent,
-      },
-      {
+      }, {
         path: 'patient/:patientId/history/add',
         component: AddHistoryComponent,
-      },
-      {
+      }, {
         path: 'patient/:patientId',
         component: PatientDetailComponent,
-      },
+      }, {
+        path: 'patient/:patientId/ipd/:ipdId',
+        component: IpdHistoryComponent
+      }, {
+        path: 'patient/:patientId/add/ipd',
+        component: IpdFormComponent
+      }, {
+        path: 'patient/:patientId/discharge',
+        component: IpdDischargeComponent
+      }
     ],
   },
   {

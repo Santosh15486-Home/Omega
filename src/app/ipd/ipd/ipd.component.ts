@@ -41,4 +41,16 @@ export class IpdComponent implements OnInit {
   public showPatinetDetail(patient: PatientModel): void {
     this.router.navigate(['app/patient/' + patient.id]);
   }
+
+  public addIpd(patient: PatientModel): void {
+    this.router.navigate(['app/patient/' + patient.id + '/add/ipd']);
+  }
+
+  public dischargePatient(patient: PatientModel): void {
+    this.router.navigate(['app/patient/' + patient.id + '/discharge']);
+  }
+
+  public showHistory(patient: PatientModel): void {
+    this.router.navigate(['app/patient/' + patient.id + '/history']);
+  }
 }

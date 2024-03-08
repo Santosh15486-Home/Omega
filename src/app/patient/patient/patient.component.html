@@ -20,11 +20,11 @@
             <i class=" ic ic-action ion-margin ion-float-right" (click)="showPatinetDetail(pat)">visibility</i>
             <ion-card-header class="ion-text-capitalize">
               <ion-card-title>{{pat.firstName}} {{pat.middleName}} {{pat.lastName}}</ion-card-title>
-              <ion-card-subtitle>Gender : {{pat.gender}} of {{pat.age}} Years </ion-card-subtitle>
+              <ion-card-subtitle>Gender : {{pat.gender}} , Age :{{pat.age}} Years </ion-card-subtitle>
             </ion-card-header>
             <ion-card-content class="ion-text-capitalize">
-              <p *ngIf="pat.mobileNo && pat.mobileNo != ''">{{pat.mobileNo}}</p>
-              <p *ngIf="pat.address && pat.address != ''">{{pat.address}}</p>
+              <p *ngIf="pat.mobileNo && pat.mobileNo != ''">Mobile no : {{pat.mobileNo}}</p>
+              <p *ngIf="pat.address && pat.address != ''">Address : {{pat.address}}</p>
             </ion-card-content>
             <ion-chip class="ion-float-left ion-margin-start ion-margin-top" *ngIf="pat.status == 'ADMITTED'">IPD</ion-chip>
             <i class="ic ic-action ion-margin ion-float-right" (click)="addHistory(pat)">add_to_photos</i>

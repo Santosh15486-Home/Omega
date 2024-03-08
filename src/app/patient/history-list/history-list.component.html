@@ -2,11 +2,21 @@
   <ion-toolbar>
     <i class="ic ic-action ion-margin-start" slot="start" (click)="goBack()">arrow_back</i>
     <ion-title>
-      <label class="ion-text-capitalize" *ngIf="patient">{{ patient.firstName }} {{ patient.lastName }}</label>
+      <label class="ion-text-capitalize" *ngIf="patient">History</label>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-card  mode="ios" *ngIf="patient">
+    <ion-card-header class="ion-text-capitalize">
+      <ion-card-title>{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}</ion-card-title>
+      <ion-card-subtitle>Gender : {{patient.gender}} , Age :{{patient.age}} Years </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="ion-text-capitalize">
+      <p *ngIf="patient.mobileNo && patient.mobileNo != ''">Mobile no : {{patient.mobileNo}}</p>
+      <p *ngIf="patient.address && patient.address != ''">Address : {{patient.address}}</p>
+    </ion-card-content>
+  </ion-card>
   <ng-container *ngIf="history.length == 0">
     <div class="ion-text-center ion-margin-top">
       <i class="ic ic-big ion-margin-top">info</i>
@@ -14,10 +24,10 @@
     </div>
   </ng-container>
   <ng-container *ngIf="history.length > 0">
-    <ion-list mode="md">
-      <!-- <ion-list-header>
+    <ion-list mode="ios">
+      <ion-list-header>
         <ion-label>Patient History : </ion-label>
-      </ion-list-header> -->
+      </ion-list-header>
       <ion-item *ngFor="let his of history">
         <ion-grid class="ion-text-capitalize">
           <ion-row>
@@ -50,6 +60,7 @@
             </ng-container>
           </ion-row>
         </ion-grid>
+        <i class="ic ic-action" *ngIf="his.ipdId" (click)="showIpdDetails(his.ipdId)">ward</i>
       </ion-item>
     </ion-list>
   </ng-container>
