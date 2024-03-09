@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { PatientModel } from 'src/app/dtos/patient.dto';
+import { IpdService } from 'src/app/services/ipd.service';
 import { ModelService } from 'src/app/services/model.service';
 import { PatientService } from 'src/app/services/patient.service';
 
@@ -50,6 +51,19 @@ export class PatientDetailComponent implements OnInit {
 
   public addIpdRound(): void {
     this.router.navigate(['app/patient/' + this.patient.id + '/add/ipd'])
+  }
+
+  public admitPatient(): void {
+    this.modalService.loading = true;
+    this.patientService.admitPatient(this.patient).subscribe((resp) => {
+      this.modalService.loading = false;
+      if (resp.body.code == "SUCCESS") {
+        this.getPatientDetails();
+        this.modalService.showSuccessBar(resp.body.message);
+      } else {
+        this.modalService.showErrorBar(resp.body.message);
+      }
+    });
   }
 
   public goBack(): void {

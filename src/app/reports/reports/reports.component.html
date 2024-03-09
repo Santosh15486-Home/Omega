@@ -31,9 +31,14 @@
     <ion-item>
       <ion-grid>
         <ion-row class="header-row">
-          <ion-col size="6">Date</ion-col>
+          <ion-col size="5">Date</ion-col>
           <ion-col size="3" class="ion-text-right">Patients</ion-col>
-          <ion-col size="3" class="ion-text-right">Fee</ion-col>
+          <ion-col size="4" class="ion-text-right">Fee</ion-col>
+        </ion-row>
+        <ion-row class="sub-header-row">
+          <ion-col size="5"></ion-col>
+          <ion-col size="3" class="ion-text-right">{{patientTotal}}</ion-col>
+          <ion-col size="4" class="ion-text-right">{{feeTotal | currency : 'RS. '}}</ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
@@ -41,9 +46,9 @@
       <ion-item *ngFor="let re of reportData">
         <ion-grid>
           <ion-row >
-            <ion-col size="6">{{re.label}}</ion-col>
+            <ion-col size="5">{{re.label}}</ion-col>
             <ion-col size="3" class="ion-text-right">{{re.patCount}}</ion-col>
-            <ion-col size="3" class="ion-text-right">{{re.dayFee}}</ion-col>
+            <ion-col size="4" class="ion-text-right">{{re.dayFee}}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>

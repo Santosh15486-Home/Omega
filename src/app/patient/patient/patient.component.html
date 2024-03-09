@@ -26,10 +26,15 @@
               <p *ngIf="pat.mobileNo && pat.mobileNo != ''">Mobile no : {{pat.mobileNo}}</p>
               <p *ngIf="pat.address && pat.address != ''">Address : {{pat.address}}</p>
             </ion-card-content>
-            <ion-chip class="ion-float-left ion-margin-start ion-margin-top" *ngIf="pat.status == 'ADMITTED'">IPD</ion-chip>
-            <i class="ic ic-action ion-margin ion-float-right" (click)="addHistory(pat)">add_to_photos</i>
+            <ion-chip class="ion-float-left ion-margin-start" *ngIf="pat.status == 'ADMITTED'">IPD</ion-chip>
+            <ion-button fill="clear" class="ion-float-right" (click)="addHistory(pat)">add visit</ion-button>
+            <ion-button fill="clear" class="ion-float-right" (click)="showHistotyl(pat)">history</ion-button>
+            <ion-button fill="clear" class="ion-float-right" (click)="toggleNewPatientModel(true, pat)">Edit</ion-button>
+
+            <!-- <i class="ic ic-action ion-margin ion-float-right" (click)="addHistory(pat)">add_to_photos</i>
             <i class="ic ic-action ion-margin ion-float-right" (click)="showHistotyl(pat)">history</i>
-            <i class="ic ic-action ion-margin ion-float-right" (click)="toggleNewPatientModel(true, pat)">stylus_note</i>
+            <i class="ic ic-action ion-margin ion-float-right" (click)="toggleNewPatientModel(true, pat)">stylus_note</i> -->
+
           </ion-card>
         </ion-col>
       </ion-row>

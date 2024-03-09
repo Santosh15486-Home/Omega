@@ -66,6 +66,14 @@
   }
 }
 
+.ic-disabled {
+  color: #d3d3d3;
+  &:hover {
+    background-color: transparent;
+    color: #d3d3d3;
+  }
+}
+
 .ic-big {
   font-size: 3em;
 }

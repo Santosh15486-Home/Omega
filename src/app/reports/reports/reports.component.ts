@@ -38,6 +38,8 @@ export class ReportsComponent {
   public patCountLoaded = false;
   public feeLoaded = false;
   public reportData: ReportData[] = [];
+  public patientTotal: number = 0;
+  public feeTotal: number = 0;
 
   constructor(
     private modalService: ModelService,
@@ -70,17 +72,21 @@ export class ReportsComponent {
   }
 
   private processPatientData(data: Data[]): void {
+    this.patientTotal = 0;
     data.map((d) => {
       this.reportData.push(new ReportData(d.label, d.value));
+      this.patientTotal = this.patientTotal + +d.value;
     });
     this.laodFeeReport();
   }
 
   private processFeetData(data: Data[]): void {
+    this.feeTotal = 0;
     data.forEach((d) => {
       let obj = this.reportData.find(r => r.label == d.label);
         if(obj){
           obj.dayFee = d.value;
+          this.feeTotal = this.feeTotal + +d.value;
         };
     });
   }

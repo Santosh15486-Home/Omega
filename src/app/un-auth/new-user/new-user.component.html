@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create New Account</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()" [strong]="true">Login</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ng-container *ngIf="activeStep == 1">
+    <ion-card mode="ios">
+      <ion-card-header>
+        <ion-card-title>User Details</ion-card-title>
+        <ion-card-subtitle>Please enter your personal details.</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Firstname" type="text" labelPlacement="floating" placeholder="Name"
+            [(ngModel)]="user.firstName"></ion-input>
+        </ion-item>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Lastname" type="text" labelPlacement="floating" placeholder="Lastname"
+            [(ngModel)]="user.lastName"></ion-input>
+        </ion-item>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Mobile no" type="number" labelPlacement="floating" placeholder="Mobile no"
+            [(ngModel)]="user.mobileNo"></ion-input>
+        </ion-item>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Email" type="email" labelPlacement="floating" placeholder="Email"
+            [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-button fill="clear" class="ion-margin ion-float-right" (click)="nextStep()">Next</ion-button>
+    </ion-card>
+  </ng-container>
+  <ng-container *ngIf="activeStep == 2">
+    <ion-card mode="ios">
+      <ion-card-header>
+        <ion-card-title>Hospital Details</ion-card-title>
+        <ion-card-subtitle>Plase enter hospital details below.</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Clinic Name" type="text" labelPlacement="floating" placeholder="Clinic name"
+            [(ngModel)]="user.clinic.clinicName"></ion-input>
+        </ion-item>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Contact no" type="number" labelPlacement="floating" placeholder="Contact no"
+            [(ngModel)]="user.clinic.contactNo"></ion-input>
+        </ion-item>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Address" type="text" labelPlacement="floating" placeholder="Address"
+            [(ngModel)]="user.clinic.address"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-button fill="clear" class="ion-margin ion-float-left" (click)="prevStep()">Previous</ion-button>
+      <ion-button fill="clear" class="ion-margin ion-float-right" (click)="nextStep()">Next</ion-button>
+    </ion-card>
+  </ng-container>
+  <ng-container *ngIf="activeStep == 3">
+    <ion-card mode="ios">
+      <ion-card-header>
+        <ion-card-title>Password</ion-card-title>
+        <ion-card-subtitle>Password which you can easily remember.</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Password" type="text" labelPlacement="floating" placeholder="Address"
+            [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+        <ion-item style="margin-right: 15px;">
+          <ion-input label="Re enter password" type="text" labelPlacement="floating" placeholder="Password"
+            [(ngModel)]="tempPass"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-button fill="clear" class="ion-margin ion-float-left" (click)="prevStep()">Previous</ion-button>
+      <ion-button class="ion-margin ion-float-right" (click)="createUser()">Next</ion-button>
+    </ion-card>
+  </ng-container>
+  <ng-container *ngIf="activeStep == 4">
+    <div class="ion-text-center ion-margin-top">
+      <i class="ic ic-big ion-margin-top">done</i>
+      <h2>Account has been created.</h2>
+      <ion-button fill="clear" class="ion-margin" (click)="goToLogin()">Login</ion-button>
+    </div>
+  </ng-container>
+  <div class="ion-margin error-message" *ngIf="errorMessage.length != 0">
+    <ul>
+      <li *ngFor="let error of errorMessage">{{error}}</li>
+    </ul>
+  </div>
+</ion-content>
+<ion-toast [isOpen]="modelService.showToast" [message]="modelService.toastMessage" position="top"
+  [class]="modelService.toastClass" positionAnchor="header" [duration]="5000"></ion-toast>
+
+<ion-loading mode="ios" [isOpen]="modelService.loading" message="Loading"></ion-loading>

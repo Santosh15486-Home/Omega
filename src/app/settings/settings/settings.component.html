@@ -1,37 +1,57 @@
 <ion-header mode="md">
   <ion-toolbar>
     <ion-title>Settings</ion-title>
+    <i class="ic ic-action ion-margin-end" slot="end" (click)="signOut()">logout</i>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
-  <ng-container *ngIf="user">
-    <h2>Profile</h2>
-    <ion-grid>
-      <ion-row class="detail-row">
-        <ion-col size="4" class="label">Name</ion-col>
-        <ion-col size="12" class="detail">{{user.firstName}} {{user.lastName}}</ion-col>
-      </ion-row>
-      <ion-row class="detail-row">
-        <ion-col size="4" class="label">Mobile</ion-col>
-        <ion-col size="12" class="detail">{{user.mobileNo}}</ion-col>
-      </ion-row>
-      <ion-row class="detail-row">
-        <ion-col size="4" class="label">Email</ion-col>
-        <ion-col size="12" class="detail">{{user.email}}</ion-col>
-      </ion-row>
-      <ion-row class="detail-row">
-        <ion-col size="4" class="label">Clinic</ion-col>
-        <ion-col size="12" class="detail">{{user.clinic.clinicName}}</ion-col>
-      </ion-row>
-      <ion-row class="detail-row">
-        <ion-col size="4" class="label">Address</ion-col>
-        <ion-col size="12" class="detail">{{user.clinic.address}}</ion-col>
-      </ion-row>
-      <ion-row class="detail-row">
-        <ion-col size="4" class="label">Contact no</ion-col>
-        <ion-col size="12" class="detail">{{user.clinic.contactNo}}</ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-button fill="clear" class="ion-margin-top" expand="full" (click)="signOut()">Sign out</ion-button>
-  </ng-container>
+<ion-content color="light">
+  <ion-card  mode="ios" *ngIf="user">
+    <ion-card-header class="ion-text-capitalize">
+      <ion-card-title>{{user.firstName}} {{user.lastName}}</ion-card-title>
+      <ion-card-subtitle>{{user.clinic.clinicName}} , {{user.clinic.address}} </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="ion-text-capitalize">
+      <p *ngIf="user.mobileNo && user.mobileNo != ''">Mobile no : {{user.mobileNo}}</p>
+      <p *ngIf="user.email && user.email != ''">Email : {{user.email}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-list [inset]="true" mode="ios">
+    <ion-list-header>
+      <ion-label>Extra Fields</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let option of extraFiledsOptions">
+      <ion-label class="ion-icon">{{option.name}}
+        <i class="ic ic-action ion-float-right" (click)="manageExtraFileds(option.type)">tune</i>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list [inset]="true" mode="ios">
+    <ion-list-header>
+      <ion-label>Tags</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let option of tagsOptions">
+      <ion-label class="ion-icon">{{option.name}}
+        <i class="ic ic-action ion-float-right" (click)="manageTags(option.type)">tune</i>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- <ion-list [inset]="true" mode="ios">
+    <ion-list-header>
+      <ion-label>Account</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label class="ion-icon">Personal Details<i class="ic ic-action ion-float-right">tune</i></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-icon">Hospital Details<i class="ic ic-action ion-float-right">tune</i></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-icon">App Users<i class="ic ic-action ion-float-right">tune</i></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="ion-icon">Change Password<i class="ic ic-action ion-float-right">tune</i></ion-label>
+    </ion-item>
+  </ion-list> -->
 </ion-content>

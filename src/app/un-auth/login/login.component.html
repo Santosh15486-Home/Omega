@@ -1,10 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Smart Opd</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="signUp()" [strong]="true">Sign Up</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-card>
+  <ion-card mode="ios">
     <ion-card-header>
       <ion-card-title>Login</ion-card-title>
       <ion-card-subtitle>Log in using your mobile no and password.</ion-card-subtitle>
@@ -16,22 +19,22 @@
         </ion-input>
       </ion-item>
       <ion-item>
-        <ion-input label="Password" labelPlacement="stacked" [clearInput]="true" placeholder="Password"
-          name="Password" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="user.password">
+        <ion-input label="Password" labelPlacement="stacked" [clearInput]="true" placeholder="Password" name="Password"
+          [type]="showPassword ? 'text' : 'password'" [(ngModel)]="user.password">
         </ion-input>
       </ion-item>
-      <ion-checkbox class="ion-margin" mode="md" labelPlacement="end" [(ngModel)]="showPassword">{{showPassword ? 'Hide Password' : 'Show Password'}}</ion-checkbox>
+      <ion-checkbox class="ion-margin" mode="md" labelPlacement="end" [(ngModel)]="showPassword">{{showPassword ? 'Hide
+        Password' : 'Show Password'}}</ion-checkbox>
     </ion-card-content>
-    <ion-toggle class="ion-margin ion-padding-start ion-float-left" labelPlacement="end" 
-    [(ngModel)]="autoLogin" (ionChange)="autoLooginToggle()">Auto Login</ion-toggle>
+    <ion-toggle class="ion-margin ion-padding-start ion-float-left" labelPlacement="end" [(ngModel)]="autoLogin"
+      (ionChange)="autoLooginToggle()">Auto Login</ion-toggle>
     <ion-button class="ion-margin ion-float-right" (click)="userLogin(autoLogin)">Login</ion-button>
     <!-- <ion-button fill="clear" class="ion-margin ion-float-right" (click)="clearForm()">Clear</ion-button> -->
   </ion-card>
-  <ion-toast
-    [isOpen]="modelService.showToast"
-    [message]="modelService.toastMessage"
-    position="top"
-    [class]="modelService.toastClass"
-    positionAnchor="header"
-    [duration]="5000"></ion-toast>
+  <ion-toast [isOpen]="modelService.showToast" [message]="modelService.toastMessage" position="top"
+    [class]="modelService.toastClass" positionAnchor="header" [duration]="5000"></ion-toast>
 </ion-content>
+<ion-toast [isOpen]="modelService.showToast" [message]="modelService.toastMessage" position="top"
+  [class]="modelService.toastClass" positionAnchor="header" [duration]="5000"></ion-toast>
+
+<ion-loading mode="ios" [isOpen]="modelService.loading" message="Loading"></ion-loading>

@@ -13,6 +13,9 @@ import { AccoutExpiredComponent } from './un-auth/accout-expired/accout-expired.
 import { IpdHistoryComponent } from './ipd/ipd-history/ipd-history.component';
 import { IpdFormComponent } from './ipd/ipd-form/ipd-form.component';
 import { IpdDischargeComponent } from './ipd/ipd-discharge/ipd-discharge.component';
+import { ManageTagsComponent } from './settings/manage-tags/manage-tags.component';
+import { ManageExtraFieldsComponent } from './settings/manage-extra-fields/manage-extra-fields.component';
+import { NewUserComponent } from './un-auth/new-user/new-user.component';
 
 export const routes: Routes = [
   {
@@ -61,20 +64,26 @@ export const routes: Routes = [
       }, {
         path: 'patient/:patientId/discharge',
         component: IpdDischargeComponent
+      }, {
+        path: 'settings/tags/:type',
+        component: ManageTagsComponent
+      }, {
+        path: 'settings/extrafields/:type',
+        component: ManageExtraFieldsComponent
       }
     ],
-  },
-  {
+  }, {
     path: 'login',
     component: LoginComponent,
-  },
-  {
+  }, {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
-  },
-  {
+  }, {
     path: 'deactivated',
     component: AccoutExpiredComponent
-  },
+  }, {
+    path: 'signup',
+    component: NewUserComponent
+  }
 ];

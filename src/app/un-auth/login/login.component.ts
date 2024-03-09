@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AutoLoginData, LoginModel } from 'src/app/dtos/patient.dto';
 import { Apis } from 'src/app/services/apis';
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   private apis = new Apis();
   constructor(
     private userService: UserService,
-    public modelService: ModelService
+    public modelService: ModelService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -30,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   ionViewWillEnter() {
     let data: AutoLoginData = this.apis.getAutoLoginData();
-    console.log(data);
     if (data.canAutoLogin) {
       this.user = data.loginData;
       this.userLogin(true);
@@ -47,6 +48,10 @@ export class LoginComponent implements OnInit {
 
   public clearForm(): void {
     this.user = new LoginModel('', '');
+  }
+
+  public signUp(): void {
+    this.router.navigate(['signup']);
   }
 
   public autoLooginToggle(): void {

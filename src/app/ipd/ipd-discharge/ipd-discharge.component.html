@@ -43,6 +43,10 @@
   </ion-grid>
   <div class="ion-text-right ion-padding">
     <ion-button fill="clear" class="form-button" (click)="clearForm()">Clear</ion-button>
-    <ion-button class="form-button" (click)="dischargePatient()">Discharge</ion-button>
+    <ion-button class="form-button" (click)="conformDischarge()">Discharge</ion-button>
   </div>
 </ion-content>
+<ion-alert mode="ios" [isOpen]="showDischargeAlert"
+  header="Sure to discharge patient"
+  message="Patient will be discharged and can not undo this action"
+  [buttons]="alertButtons"></ion-alert>

@@ -15,11 +15,26 @@ import { PatientService } from 'src/app/services/patient.service';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class IpdDischargeComponent  implements OnInit {
+export class IpdDischargeComponent implements OnInit {
 
   public patientId: number;
   public patient: PatientModel;
   public discharge: DischargeModel;
+  public showDischargeAlert = false;
+  alertButtons = [{
+    text: 'No',
+    role: 'cancel',
+    handler: () => {
+      this.alertClosed(false);
+    },
+  },
+  {
+    text: 'Yes',
+    role: 'confirm',
+    handler: () => {
+      this.alertClosed(true);
+    },
+  },];
 
   constructor(
     private route: ActivatedRoute,
@@ -55,7 +70,7 @@ export class IpdDischargeComponent  implements OnInit {
   }
 
   public changePaidOrNot(): void {
-    if(this.discharge.feesPaid) {
+    if (this.discharge.feesPaid) {
       this.discharge.amountPaid = this.discharge.fees;
     } else {
       this.discharge.amountPaid = 0;
@@ -66,7 +81,18 @@ export class IpdDischargeComponent  implements OnInit {
     this.discharge = new DischargeModel();
   }
 
-  public dischargePatient(): void {
+  public alertClosed(res: boolean) {
+    this.toggleAlert();
+    if(res) {
+      this.dischargePatient();
+    }
+  }
+
+  public conformDischarge(): void {
+    this.toggleAlert();
+  }
+
+  private dischargePatient(): void {
     this.discharge.patinetId = this.patient.id;
     this.discharge.ipdId = this.patient.ipd.id;
     if(!this.discharge.fees) {
@@ -86,6 +112,10 @@ export class IpdDischargeComponent  implements OnInit {
         this.modalService.showErrorBar(resp.body.message);
       }
     });
+  }
+
+  public toggleAlert(): void {
+    this.showDischargeAlert = !this.showDischargeAlert;
   }
 
   public onFeeChange(): void {
